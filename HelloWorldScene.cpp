@@ -30,40 +30,40 @@ void HelloWorld::Move4Direction(cocos2d::CCSprite * hero,
 
 
     if(direction==DOWN){
-    frame0->initWithTexture(herotexture,CCRect(24*0,24*0,24,24));
+    frame0->initWithTexture(herotexture,CCRect(22*0,22*0,22,22));
     
-    frame1->initWithTexture(herotexture,CCRect(24*1,24*0,24,24));
+    frame1->initWithTexture(herotexture,CCRect(22*1,22*0,22,22));
 
-    frame2->initWithTexture(herotexture,CCRect(24*2,24*0,24,24));
+    frame2->initWithTexture(herotexture,CCRect(22*2,22*0,22,22));
 
-    frame3->initWithTexture(herotexture,CCRect(24*3,24*0,24,24));
+    frame3->initWithTexture(herotexture,CCRect(22*3,22*0,22,22));
     }
     if(direction==UP){
-    frame0->initWithTexture(herotexture,CCRect(24*0,24*2,24,24));
+    frame0->initWithTexture(herotexture,CCRect(22*0,22*2,22,22));
     
-    frame1->initWithTexture(herotexture,CCRect(24*1,24*2,24,24));
+    frame1->initWithTexture(herotexture,CCRect(22*1,22*2,22,22));
 
-    frame2->initWithTexture(herotexture,CCRect(24*2,24*2,24,24));
+    frame2->initWithTexture(herotexture,CCRect(22*2,22*2,22,22));
 
-    frame3->initWithTexture(herotexture,CCRect(24*3,24*2,24,24));
+    frame3->initWithTexture(herotexture,CCRect(22*3,22*2,22,22));
     } 
     if(direction==RIGHT){
-    frame0->initWithTexture(herotexture,CCRect(24*0,24*3,24,24));
+    frame0->initWithTexture(herotexture,CCRect(22*0,22*3,22,22));
     
-    frame1->initWithTexture(herotexture,CCRect(24*1,24*3,24,24));
+    frame1->initWithTexture(herotexture,CCRect(22*1,22*3,22,22));
 
-    frame2->initWithTexture(herotexture,CCRect(24*2,24*3,24,24));
+    frame2->initWithTexture(herotexture,CCRect(22*2,22*3,22,22));
 
-    frame3->initWithTexture(herotexture,CCRect(24*3,24*3,24,24));
+    frame3->initWithTexture(herotexture,CCRect(22*3,22*3,22,22));
     } 
     if(direction==LEFT){
-    frame0->initWithTexture(herotexture,CCRect(24*0,24*1,24,24));
+    frame0->initWithTexture(herotexture,CCRect(22*0,22*1,22,22));
     
-    frame1->initWithTexture(herotexture,CCRect(24*1,24*1,24,24));
+    frame1->initWithTexture(herotexture,CCRect(22*1,22*1,22,22));
 
-    frame2->initWithTexture(herotexture,CCRect(24*2,24*1,24,24));
+    frame2->initWithTexture(herotexture,CCRect(22*2,22*1,22,22));
 
-    frame3->initWithTexture(herotexture,CCRect(24*3,24*1,24,24));
+    frame3->initWithTexture(herotexture,CCRect(22*3,22*1,22,22));
     }
 
 
@@ -101,7 +101,7 @@ void HelloWorld::Move4Direction(cocos2d::CCSprite * hero,
     }
     if(direction==LEFT){
     moveTo->initWithDuration(actTime,
-        ccp(hero->getPosition().x-pace,hero->getPosition().y+pace));
+        ccp(hero->getPosition().x-pace,hero->getPosition().y));
     }
 
 
@@ -143,6 +143,14 @@ bool HelloWorld::init()
         return false;
     }
     
+    //Touch
+    setTouchEnabled(true);
+    
+    //daima hebing
+   CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+        
+
+
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
@@ -201,13 +209,13 @@ bool HelloWorld::init()
     // CCSpriteFrame * frame2 = new CCSpriteFrame();
     // CCSpriteFrame * frame3 = new CCSpriteFrame();
 
-    // frame0->initWithTexture(herotexture,CCRect(24*0,24*0,24,24));
+    // frame0->initWithTexture(herotexture,CCRect(22*0,22*0,22,22));
     
-    // frame1->initWithTexture(herotexture,CCRect(24*1,24*0,24,24));
+    // frame1->initWithTexture(herotexture,CCRect(22*1,22*0,22,22));
 
-    // frame2->initWithTexture(herotexture,CCRect(24*2,24*0,24,24));
+    // frame2->initWithTexture(herotexture,CCRect(22*2,22*0,22,22));
 
-    // frame3->initWithTexture(herotexture,CCRect(24*3,24*0,24,24));
+    // frame3->initWithTexture(herotexture,CCRect(22*3,22*0,22,22));
 
 
     // CCArray* heroanimationarray=new CCArray();
@@ -224,15 +232,16 @@ bool HelloWorld::init()
     CCSprite * herosprite =new CCSprite();
 
     // //herosprite->initWithSpriteFrame(frame0);
-    herosprite->initWithTexture(herotexture,CCRect(24*0,24*0,24,24));
+    herosprite->initWithTexture(herotexture,CCRect(22*0,22*0,22,22));
     herosprite->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
 
     
     CCSprite * herosprite2 =new CCSprite();
 
-     herosprite2->initWithTexture(herotexture,CCRect(24,24*0,24,24));
-    herosprite2->setPosition(ccp(visibleSize.width/2,visibleSize.height/2+24));
-      Move4Direction(herosprite,herotexture,RIGHT,10,0.4);
+     herosprite2->initWithTexture(herotexture,CCRect(22,22*0,22,22));
+    herosprite2->setPosition(ccp(visibleSize.width/2,visibleSize.height/2+22));
+    //  Move4Direction(herosprite,herotexture,RIGHT,10,0.4);
+     Move4Direction(herosprite,herotexture,LEFT,10,0.4);
 
     this->addChild(herosprite,999);
 
@@ -247,7 +256,7 @@ bool HelloWorld::init()
 
    //  herosprite->runAction(heroanimate);
 
-   //  herosprite2->setTextureRect(CCRect(24*0,24*2,24,24));
+   //  herosprite2->setTextureRect(CCRect(22*0,22*2,22,22));
 
    //  CCMoveTo * moveTo=new CCMoveTo();
    //  moveTo->initWithDuration(0.4f,
@@ -257,7 +266,7 @@ bool HelloWorld::init()
 
    //  herosprite->runAction(moveTo);
 
-    //herosprite2->setPosition(ccp(herosprite2->getPosition().x-24,herosprite2->getPosition().y));
+    //herosprite2->setPosition(ccp(herosprite2->getPosition().x-22,herosprite2->getPosition().y));
     //herosprite2->setVisible(false);
    
 
@@ -278,4 +287,29 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
     exit(0);
 #endif
 #endif
+}
+
+
+bool HelloWorld::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    bool bRet = true;
+    
+    CCLog("HelloWorld Touch Began");
+    
+    return bRet;
+}
+
+void HelloWorld::ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    CCLog("HelloWorld Touch Moved");
+}
+
+void HelloWorld::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    CCLog("HelloWorld Touch Ended");
+}
+
+void HelloWorld::ccTouchCancelled(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
+{
+    CCLog("HelloWorld Touch Cancelled");
 }

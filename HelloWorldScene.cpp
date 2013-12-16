@@ -1,6 +1,8 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
 
+#include "math.h"
+
 #define UP 1
 #define DOWN 2
 #define RIGHT 3
@@ -9,7 +11,7 @@
 USING_NS_CC;
 
 
-
+CCSprite * herosprite2;
 
 void HelloWorld::Move4Direction(cocos2d::CCSprite * hero,
     cocos2d::CCTexture2D * herotexture,int direction,float pace,float actTime){
@@ -133,6 +135,38 @@ CCScene* HelloWorld::scene()
     return scene;
 }
 
+
+void HelloWorld::MovoToTouch(cocos2d::CCSprite *hero ,float dx,float dy,float v){
+
+//move to touch point;
+
+
+    float nowx,nowy,deltax,deltay,lucheng,movetime;
+
+    nowx=hero->getPosition().x;
+    nowy=hero->getPosition().y;
+
+
+    deltax=abs(dx-nowx);
+    deltay=abs(dy-nowy);
+
+    lucheng=sqrt(deltay*deltay+deltax*deltax);
+    
+    printf("lucheng=%f\n",lucheng);
+    movetime=lucheng/v;
+    printf("movetime=%f\n",movetime);
+
+    CCMoveTo * touchmove = new CCMoveTo();
+
+    touchmove-> initWithDuration(movetime,ccp(dx,dy));
+    hero->stopAllActions();
+    hero->runAction(touchmove);
+
+
+
+}
+
+
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
@@ -236,7 +270,7 @@ bool HelloWorld::init()
     herosprite->setPosition(ccp(visibleSize.width/2,visibleSize.height/2));
 
     
-    CCSprite * herosprite2 =new CCSprite();
+    herosprite2 =new CCSprite();
 
      herosprite2->initWithTexture(herotexture,CCRect(22,22*0,22,22));
     herosprite2->setPosition(ccp(visibleSize.width/2,visibleSize.height/2+22));
@@ -295,13 +329,27 @@ bool HelloWorld::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent
     bool bRet = true;
     
     CCLog("HelloWorld Touch Began");
-    
+    CCPoint touchlocation=pTouch->getLocationInView();
+   touchlocation=CCDirector::sharedDirector()->convertToGL( touchlocation );
+    touchx=touchlocation.x;
+    touchy=touchlocation.y;
+    MovoToTouch(herosprite2,touchx,touchy,100);
     return bRet;
 }
 
 void HelloWorld::ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
 {
-    CCLog("HelloWorld Touch Moved");
+    
+
+CCPoint touchlocation=pTouch->getLocationInView();
+touchlocation=CCDirector::sharedDirector()->convertToGL( touchlocation );
+    touchx=touchlocation.x;
+    touchy=touchlocation.y;
+   // CCLog("touchx=%f",touchx);
+     //CCLog("touchx=%f",touchx);
+ // MovoToTouch(herosprite2,touchx,touchy);
+    printf("touchx=%f\n", touchx);
+     printf("touchy=%f\n", touchy);
 }
 
 void HelloWorld::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
